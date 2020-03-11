@@ -1,0 +1,8 @@
+language: rust
+rust:
+  - stable
+before_install:
+  - rustup target add wasm32-unknown-unknown
+script:
+  - ./build.sh
+  - cargo test --verbose --all
