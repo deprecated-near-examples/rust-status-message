@@ -1,6 +1,10 @@
+
 # Status Message
 
 Saves and records the status messages of accounts that call this contract.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/near-examples/rust-status-message)
+
 
 ## Prerequisite
 Ensure `near-shell` is installed by running:
@@ -51,7 +55,7 @@ near call $NEAR_TEMP_ACCOUNT set_status '{"message": "aloha!"}' --accountId $NEA
 To retrieve the message from the contract, call `get_status` with the following:
 
 ```bash
-near view $NEAR_TEMP_ACCOUNT get_status '{"account_id": "'$NEAR_TEMP_ACCOUNT'"}' --accountId $NEAR_TEMP_ACCOUNT 
+near view $NEAR_TEMP_ACCOUNT get_status '{"account_id": "'$NEAR_TEMP_ACCOUNT'"}' --accountId $NEAR_TEMP_ACCOUNT
 ```
 
 ### Standard deploy
@@ -89,7 +93,7 @@ Note that these status messages are stored per account in a `HashMap`. See `src/
 There are two ways to create a new account:
  - the NEAR Wallet (as we did before)
  - `near create_account NEW_ACCOUNT_NAME --masterAccount YOUR_ACCOUNT_NAME`
- 
+
 Now call the contract on the first account (where it's deployed):
 
 ```bash
@@ -105,7 +109,7 @@ Returns `bonjour`.
 Make sure the original status remains:
 
 ```bash
-near view YOUR_ACCOUNT_NAME get_status '{"account_id": "YOUR_ACCOUNT_NAME"}' 
+near view YOUR_ACCOUNT_NAME get_status '{"account_id": "YOUR_ACCOUNT_NAME"}'
 ```
 
 ## Testing
