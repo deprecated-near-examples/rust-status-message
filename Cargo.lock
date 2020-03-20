@@ -52,7 +52,16 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e999aeba3dba8c2a2ac164fc3081a617dbeea104c1cc7fa877d4251f05178eb2"
 dependencies = [
- "borsh-derive",
+ "borsh-derive 0.5.0",
+]
+
+[[package]]
+name = "borsh"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2f9dada4c07fa726bc195503048581e7b1719407f7fbef82741f7b149d3921b3"
+dependencies = [
+ "borsh-derive 0.6.1",
 ]
 
 [[package]]
@@ -61,8 +70,19 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fb430b123924d9b145f18fa93ec4069017796416a1796f4855b2ac27d79aa707"
 dependencies = [
- "borsh-derive-internal",
- "borsh-schema-derive-internal",
+ "borsh-derive-internal 0.5.0",
+ "borsh-schema-derive-internal 0.5.0",
+ "syn",
+]
+
+[[package]]
+name = "borsh-derive"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47c6bed3dd7695230e85bd51b6a4e4e4dc7550c1974a79c11e98a8a055211a61"
+dependencies = [
+ "borsh-derive-internal 0.6.1",
+ "borsh-schema-derive-internal 0.6.1",
  "syn",
 ]
 
@@ -78,10 +98,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "borsh-derive-internal"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d34f80970434cd6524ae676b277d024b87dd93ecdd3f53bf470d61730dc6cb80"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "borsh-schema-derive-internal"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "be177e79ef0cb2684a1cd04b443a978df0dbaa16fc563ec420a74315e5258931"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "borsh-schema-derive-internal"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b3b93230d3769ea99ac75a8a7fee2a229defbc56fe8816c9cde8ed78c848aa33"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -187,7 +229,7 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3e9ee59b5b919fd9a1478ae2e0c8122683bfd871ea0df86028bee81e578259cd"
 dependencies = [
- "borsh",
+ "borsh 0.5.0",
  "near-bindgen-macros",
  "near-runtime-fees",
  "near-vm-logic",
@@ -260,7 +302,7 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f283afbcd98eabbf3aab1406f6c91244056cd07df7ef397c685c6268f5deac28"
 dependencies = [
- "borsh",
+ "borsh 0.5.0",
  "near-rpc-error-macro",
  "serde",
 ]
@@ -399,7 +441,7 @@ dependencies = [
 name = "status-message"
 version = "0.1.0"
 dependencies = [
- "borsh",
+ "borsh 0.6.1",
  "near-bindgen",
  "serde",
  "serde_json 1.0.40",
