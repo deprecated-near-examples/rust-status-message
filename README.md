@@ -1,10 +1,11 @@
-
-# Status Message
-
-Saves and records the status messages of accounts that call this contract.
+Status Message
+==============
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/near-examples/rust-status-message)
 
+<!-- MAGIC COMMENT: DO NOT DELETE! Everything above this line is hidden on NEAR Examples page -->
+
+Saves and records the status messages of accounts that call this contract.
 
 ## Prerequisite
 Ensure `near-shell` is installed by running:
