@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Compiles NEAR Protocol example of setting and retrieving a status message per NEAR account",
   "scripts": {
-    "build": "cross-env RUSTFLAGS='-C link-arg=-s' cargo build --target wasm32-unknown-unknown --release",
+    "build": "cross-env RUSTFLAGS=\"-C link-arg=-s\" cargo build --target wasm32-unknown-unknown --release",
     "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/"
   },
   "repository": {
