@@ -50,7 +50,7 @@ In this instance, the account is `dev-1234567890123`. A file has been created co
 Run this command to the environment variable:
 
 ```bash
-source neardev/dev-account.env
+source neardev\dev-account.env
 ```
 
 ---
