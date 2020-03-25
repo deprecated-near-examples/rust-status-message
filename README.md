@@ -5,7 +5,7 @@ Status Message
 
 <!-- MAGIC COMMENT: DO NOT DELETE! Everything above this line is hidden on NEAR Examples page -->
 
-Saves and records the status messages of accounts that call this contract.
+This smart contract saves and records the status messages of NEAR accounts that call it.
 
 ## Prerequisite
 Ensure `near-shell` is installed by running:
@@ -44,19 +44,51 @@ In this instance, the account is `dev-1234567890123`. A file has been created co
 Run this command to the environment variable:
 
 ```bash
-NEAR_TEMP_ACCOUNT=$(cat neardev/dev-account)
+source neardev/dev-account.env
 ```
+
+---
+
+**Windows users**: using the Command Prompt, instead of the command above, please set the environment variable using the `set` command. If the account name is not immediately visible on the Command Prompt, you may find it by running:
+
+```bash
+type neardev/dev-account.env
+```
+
+It will display something similar to `CONTRACT_NAME=dev-12345678901234`.
+Please set the Windows environment variable by copying that value and running `set` like so:
+
+```bash
+set CONTRACT_NAME=dev-12345678901234
+```
+
+---
+
+You can tell if the environment variable is set correctly if your command line prints the account name after this command:
+```bash
+echo CONTRACT_NAME
+```
+
+---
+
+**Windows users**: instead of the command above please surround the environment variable with percent signs `%`.
+For the remainder of this guide, please replace `$CONTRACT_NAME` with `%CONTRACT_NAME%`.
+```bash
+echo %CONTRACT_NAME%
+```
+
+---
 
 The next command will call the contract's `set_status` method:
 
 ```bash
-near call $NEAR_TEMP_ACCOUNT set_status '{"message": "aloha!"}' --accountId $NEAR_TEMP_ACCOUNT
+near call $CONTRACT_NAME set_status '{"message": "aloha!"}' --accountId $CONTRACT_NAME
 ```
 
 To retrieve the message from the contract, call `get_status` with the following:
 
 ```bash
-near view $NEAR_TEMP_ACCOUNT get_status '{"account_id": "'$NEAR_TEMP_ACCOUNT'"}' --accountId $NEAR_TEMP_ACCOUNT
+near view $CONTRACT_NAME get_status '{"account_id": "'$CONTRACT_NAME'"}' --accountId $CONTRACT_NAME
 ```
 
 ### Standard deploy
