@@ -1,13 +1,9 @@
 Status Message
 ==============
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/near-examples/rust-status-message)
-
-<!-- MAGIC COMMENT: DO NOT DELETE! Everything above this line is hidden on NEAR Examples page -->
-
 This smart contract saves and records the status messages of NEAR accounts that call it.
 
-Windows users: please visit the [Windows-specific README file](README-Windows.md).
+**Note**: this README is specific to Windows and this example. For development on OS X or Linux, please see [README.md](README.md).
 
 ## Prerequisite
 Ensure `near-shell` is installed by running:
@@ -48,28 +44,38 @@ Behind the scenes, this is creating an account and deploying a contract to it. O
 
 >Done deploying to dev-1234567890123
 
-In this instance, the account is `dev-1234567890123`. A file has been created containing the key to the account, located at `neardev/dev-account`. To make the next few steps easier, we're going to set an environment variable containing this development account id and use that when copy/pasting commands.
-Run this command to the environment variable:
+In this instance, the account is `dev-1234567890123`. A file has been created containing the key to the account, located at `neardev/dev-account.env`. To make the next few steps easier, we're going to set an environment variable containing this development account id and use that when copy/pasting commands.
+
+If the account name is not immediately visible on the Command Prompt, you may find it by running:
 
 ```bash
-source neardev\dev-account.env
+type neardev/dev-account.env
+```
+
+It will display something similar to `CONTRACT_NAME=dev-12345678901234`.
+Please set the Windows environment variable by copying that value and running `set` like so:
+
+```bash
+set CONTRACT_NAME=dev-12345678901234
 ```
 
 You can tell if the environment variable is set correctly if your command line prints the account name after this command:
 ```bash
-echo CONTRACT_NAME
+echo %CONTRACT_NAME%
 ```
 
 The next command will call the contract's `set_status` method:
 
 ```bash
-near call $CONTRACT_NAME set_status '{"message": "aloha!"}' --accountId $CONTRACT_NAME
+near call %CONTRACT_NAME% set_status "{\"message\": \"aloha!\"}" --accountId %CONTRACT_NAME%
 ```
+
+**Note**: at the time of this writing, Windows does not handle single quotes `'` well, so these commands must use escaped double-quotes `\"` which, as you may know, equates to a regular double quote `"` when parsed. Apologies for some of the unsightly commands, but it's out of necessity.
 
 To retrieve the message from the contract, call `get_status` with the following:
 
 ```bash
-near view $CONTRACT_NAME get_status '{"account_id": "'$CONTRACT_NAME'"}' --accountId $CONTRACT_NAME
+near view %CONTRACT_NAME% get_status "{\"account_id\": \""%CONTRACT_NAME%"\"}" --accountId %CONTRACT_NAME%
 ```
 
 ### Standard deploy
@@ -92,13 +98,13 @@ near deploy --wasmFile res/status_message.wasm --accountId YOUR_ACCOUNT_NAME
 Set a status for your account:
 
 ```bash
-near call YOUR_ACCOUNT_NAME set_status '{"message": "aloha friend"}' --accountId YOUR_ACCOUNT_NAME
+near call YOUR_ACCOUNT_NAME set_status "{\"message\": \"aloha friend\"}" --accountId YOUR_ACCOUNT_NAME
 ```
 
 Get the status:
 
 ```bash
-near view YOUR_ACCOUNT_NAME get_status '{"account_id": "YOUR_ACCOUNT_NAME"}'
+near view YOUR_ACCOUNT_NAME get_status "{\"account_id\": \"YOUR_ACCOUNT_NAME\"}"
 ```
 
 Note that these status messages are stored per account in a `HashMap`. See `src/lib.rs` for the code. We can try the same steps with another account to verify.
@@ -111,11 +117,11 @@ There are two ways to create a new account:
 Now call the contract on the first account (where it's deployed):
 
 ```bash
-near call YOUR_ACCOUNT_NAME set_status '{"message": "bonjour"}' --accountId NEW_ACCOUNT_NAME
+near call YOUR_ACCOUNT_NAME set_status "{\"message\": \"bonjour\"}" --accountId NEW_ACCOUNT_NAME
 ```
 
 ```bash
-near view YOUR_ACCOUNT_NAME get_status '{"account_id": "NEW_ACCOUNT_NAME"}'
+near view YOUR_ACCOUNT_NAME get_status "{\"account_id\": \"NEW_ACCOUNT_NAME\"}"
 ```
 
 Returns `bonjour`.
@@ -123,7 +129,7 @@ Returns `bonjour`.
 Make sure the original status remains:
 
 ```bash
-near view YOUR_ACCOUNT_NAME get_status '{"account_id": "YOUR_ACCOUNT_NAME"}'
+near view YOUR_ACCOUNT_NAME get_status "{\"account_id\": \"YOUR_ACCOUNT_NAME\"}"
 ```
 
 ## Testing
