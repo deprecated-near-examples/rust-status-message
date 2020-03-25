@@ -4,5 +4,5 @@ rust:
 before_install:
   - rustup target add wasm32-unknown-unknown
 script:
-  - npm run build
+  - npm install && npm run build
   - cargo test --package status-message -- --nocapture
