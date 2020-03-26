@@ -49,7 +49,7 @@ In this instance, the account is `dev-1234567890123`. A file has been created co
 If the account name is not immediately visible on the Command Prompt, you may find it by running:
 
 ```bash
-type neardev/dev-account.env
+type neardev\dev-account.env
 ```
 
 It will display something similar to `CONTRACT_NAME=dev-12345678901234`.

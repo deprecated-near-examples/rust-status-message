@@ -52,7 +52,7 @@ In this instance, the account is `dev-1234567890123`. A file has been created co
 Run this command to the environment variable:
 
 ```bash
-source neardev\dev-account.env
+source neardev/dev-account.env
 ```
 
 You can tell if the environment variable is set correctly if your command line prints the account name after this command:
