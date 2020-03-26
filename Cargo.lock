@@ -26,6 +26,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8aac770f1885fd7e387acedd76065302551364496e46b3dd00860b2f8359b9d"
 
 [[package]]
+name = "base64"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b41b7ea54a0c9d92199de89e20e58d49f02f8e699814ef3fdf266f6f748d15c7"
+
+[[package]]
 name = "block-buffer"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -48,18 +54,18 @@ dependencies = [
 
 [[package]]
 name = "borsh"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e999aeba3dba8c2a2ac164fc3081a617dbeea104c1cc7fa877d4251f05178eb2"
+checksum = "2f9dada4c07fa726bc195503048581e7b1719407f7fbef82741f7b149d3921b3"
 dependencies = [
  "borsh-derive",
 ]
 
 [[package]]
 name = "borsh-derive"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb430b123924d9b145f18fa93ec4069017796416a1796f4855b2ac27d79aa707"
+checksum = "47c6bed3dd7695230e85bd51b6a4e4e4dc7550c1974a79c11e98a8a055211a61"
 dependencies = [
  "borsh-derive-internal",
  "borsh-schema-derive-internal",
@@ -68,9 +74,9 @@ dependencies = [
 
 [[package]]
 name = "borsh-derive-internal"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f33a00c6c4b9c83146730186ecaf72b95d4a5c3bed741d2102ad5562e9bec1b"
+checksum = "d34f80970434cd6524ae676b277d024b87dd93ecdd3f53bf470d61730dc6cb80"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -79,9 +85,9 @@ dependencies = [
 
 [[package]]
 name = "borsh-schema-derive-internal"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "be177e79ef0cb2684a1cd04b443a978df0dbaa16fc563ec420a74315e5258931"
+checksum = "b3b93230d3769ea99ac75a8a7fee2a229defbc56fe8816c9cde8ed78c848aa33"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -183,9 +189,9 @@ checksum = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3"
 
 [[package]]
 name = "near-bindgen"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3e9ee59b5b919fd9a1478ae2e0c8122683bfd871ea0df86028bee81e578259cd"
+checksum = "e003a36be48d43819734311509fbad34fa209e4c3b90daaa76ece622cb1eea83"
 dependencies = [
  "borsh",
  "near-bindgen-macros",
@@ -196,9 +202,9 @@ dependencies = [
 
 [[package]]
 name = "near-bindgen-core"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "20f810b4c62fc8fd41c93417ed387917438bcaa080dedf2435b7e5ca2cf65703"
+checksum = "c13050bce4261e228ecfe376e36b633752cae098ce22876e662fdfeee5e04fb4"
 dependencies = [
  "Inflector",
  "proc-macro2",
@@ -208,9 +214,9 @@ dependencies = [
 
 [[package]]
 name = "near-bindgen-macros"
-version = "0.5.0"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f66f66cf922cddf26068f54bf4fbd394348cd0e2663a419b3f91262c517aad08"
+checksum = "b9ff73f282724c5d6a6860f173dd88d6fe623da3b1030549c41a6eb808fd45ed"
 dependencies = [
  "near-bindgen-core",
  "proc-macro2",
@@ -247,18 +253,18 @@ dependencies = [
 
 [[package]]
 name = "near-runtime-fees"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "961ee9916571e2c81dd08f62a22fba380bbe1f0914556e99762085295b615835"
+checksum = "2dbca6d037e0e9936bd5e60399d4c15adbb186a3af40bfb1d8c15f200c00873d"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "near-vm-errors"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f283afbcd98eabbf3aab1406f6c91244056cd07df7ef397c685c6268f5deac28"
+checksum = "d9b8531f7025a3b13be8185621ea43c311ac8bd1426d26f3ac246e09b21c8681"
 dependencies = [
  "borsh",
  "near-rpc-error-macro",
@@ -267,10 +273,11 @@ dependencies = [
 
 [[package]]
 name = "near-vm-logic"
-version = "0.5.0"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df3bd7ed04151a3e8fcac08fe22ef99ef48443a35610618444f774a233c25817"
+checksum = "fdfffa381f4609ff47b67e68550a3acb628367ed88a40e3f6b37d0a8248d2b02"
 dependencies = [
+ "base64",
  "bs58",
  "byteorder",
  "near-runtime-fees",

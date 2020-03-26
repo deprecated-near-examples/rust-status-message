@@ -9,3 +9,6 @@ neardev
 
 # Misc
 .DS_Store
+
+# Dependencies
+node_modules

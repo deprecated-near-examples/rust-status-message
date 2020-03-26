@@ -1,0 +1,26 @@
+{
+  "name": "rust-status-message-builder",
+  "version": "1.0.0",
+  "description": "Compiles NEAR Protocol example of setting and retrieving a status message per NEAR account",
+  "scripts": {
+    "build": "cargo build --target wasm32-unknown-unknown --release",
+    "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/near-examples/rust-status-message.git"
+  },
+  "keywords": [
+    "near-protocol",
+    "blockchain",
+    "rust",
+    "smart-contract"
+  ],
+  "author": "Mike Purvis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/near-examples/rust-status-message/issues"
+  },
+  "homepage": "https://github.com/near-examples/rust-status-message#readme",
+  "devDependencies": {}
+}
