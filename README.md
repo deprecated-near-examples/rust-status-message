@@ -57,7 +57,7 @@ source neardev/dev-account.env
 
 You can tell if the environment variable is set correctly if your command line prints the account name after this command:
 ```bash
-echo CONTRACT_NAME
+echo $CONTRACT_NAME
 ```
 
 The next command will call the contract's `set_status` method:
