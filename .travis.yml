@@ -7,8 +7,8 @@ os:
   - osx
   - windows  
 env:
-  - NODE_ENV=ci
-  - NODE_ENV=ci-staging
+  - NODE_ENV=ci YARN_GPG=no
+  - NODE_ENV=ci-staging YARN_GPG=no
 cache: yarn
 before_install:
   - rustup target add wasm32-unknown-unknown
