@@ -12,7 +12,7 @@ We've set an environment variable in Gitpod with the account name. At the bottom
 
 You may see the NEAR account by running this command:
 ```bash
-echo CONTRACT_NAME
+echo $CONTRACT_NAME
 ```
 
 The next command will call the contract's `set_status` method:
