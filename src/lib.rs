@@ -1,11 +1,10 @@
 use borsh::{BorshDeserialize, BorshSerialize};
-use near_bindgen::{env, metadata, near_bindgen};
+use near_sdk::{env, near_bindgen};
 use std::collections::HashMap;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-metadata!{
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
@@ -20,19 +19,18 @@ impl StatusMessage {
         self.records.insert(account_id, message);
     }
 
-    pub fn get_status(&self, account_id: String) -> Option::<String> {
+    pub fn get_status(&self, account_id: String) -> Option<String> {
         env::log(b"A");
         self.records.get(&account_id).cloned()
     }
-}
 }
 
 #[cfg(not(target_arch = "wasm32"))]
 #[cfg(test)]
 mod tests {
     use super::*;
-    use near_bindgen::MockedBlockchain;
-    use near_bindgen::{testing_env, VMContext};
+    use near_sdk::MockedBlockchain;
+    use near_sdk::{testing_env, VMContext};
 
     fn get_context(input: Vec<u8>, is_view: bool) -> VMContext {
         VMContext {
@@ -51,6 +49,7 @@ mod tests {
             random_seed: vec![0, 1, 2],
             is_view,
             output_data_receivers: vec![],
+            epoch_height: 0,
         }
     }
 
@@ -60,7 +59,10 @@ mod tests {
         testing_env!(context);
         let mut contract = StatusMessage::default();
         contract.set_status("hello".to_string());
-        assert_eq!("hello".to_string(), contract.get_status("bob_near".to_string()).unwrap());
+        assert_eq!(
+            "hello".to_string(),
+            contract.get_status("bob_near".to_string()).unwrap()
+        );
     }
 
     #[test]
