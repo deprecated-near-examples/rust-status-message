@@ -188,43 +188,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3"
 
 [[package]]
-name = "near-bindgen"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e003a36be48d43819734311509fbad34fa209e4c3b90daaa76ece622cb1eea83"
-dependencies = [
- "borsh",
- "near-bindgen-macros",
- "near-runtime-fees",
- "near-vm-logic",
- "serde",
-]
-
-[[package]]
-name = "near-bindgen-core"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c13050bce4261e228ecfe376e36b633752cae098ce22876e662fdfeee5e04fb4"
-dependencies = [
- "Inflector",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "near-bindgen-macros"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b9ff73f282724c5d6a6860f173dd88d6fe623da3b1030549c41a6eb808fd45ed"
-dependencies = [
- "near-bindgen-core",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
 name = "near-rpc-error-core"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -233,7 +196,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "serde",
- "serde_json 1.0.48",
+ "serde_json",
  "syn",
 ]
 
@@ -247,24 +210,63 @@ dependencies = [
  "proc-macro2",
  "quote",
  "serde",
- "serde_json 1.0.48",
+ "serde_json",
  "syn",
 ]
 
 [[package]]
 name = "near-runtime-fees"
-version = "0.6.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2dbca6d037e0e9936bd5e60399d4c15adbb186a3af40bfb1d8c15f200c00873d"
+checksum = "4324fa778de675b23edb4da36eac17a05ef7fc40f0a6d36e83cc6040e56fdb30"
 dependencies = [
  "serde",
 ]
 
 [[package]]
-name = "near-vm-errors"
-version = "0.6.1"
+name = "near-sdk"
+version = "0.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d9b8531f7025a3b13be8185621ea43c311ac8bd1426d26f3ac246e09b21c8681"
+checksum = "fdd218ef5ff9acf4ed8375c14aac570589ec837a05d61b60a2e3d212d4358a90"
+dependencies = [
+ "base64",
+ "borsh",
+ "bs58",
+ "near-runtime-fees",
+ "near-sdk-macros",
+ "near-vm-logic",
+ "serde",
+]
+
+[[package]]
+name = "near-sdk-core"
+version = "0.9.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "88f97b569352978bc6473f928459ce6f3d040a465b8d087097c6cd038e9dc65d"
+dependencies = [
+ "Inflector",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "near-sdk-macros"
+version = "0.9.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "52b152b7e4821601ae363aa088a9f0b76b120c666b5b6a07aa395fa9a1279a49"
+dependencies = [
+ "near-sdk-core",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "near-vm-errors"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "464d6d36cf4840bed8ef57a4f043ce1da471b7021171d5470bd9f3112611fe9a"
 dependencies = [
  "borsh",
  "near-rpc-error-macro",
@@ -273,9 +275,9 @@ dependencies = [
 
 [[package]]
 name = "near-vm-logic"
-version = "0.6.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fdfffa381f4609ff47b67e68550a3acb628367ed88a40e3f6b37d0a8248d2b02"
+checksum = "dd3b537fe6c7b0eada25747c6bd3a3de26f572f5ee84c72fda054f715b83e281"
 dependencies = [
  "base64",
  "bs58",
@@ -357,19 +359,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.40"
-source = "git+https://github.com/nearprotocol/json?rev=1f5779f3b0bd3d2a4b0b975abc46f3d3fe873331#1f5779f3b0bd3d2a4b0b975abc46f3d3fe873331"
-dependencies = [
- "itoa",
- "ryu",
- "serde",
-]
-
-[[package]]
-name = "serde_json"
-version = "1.0.48"
+version = "1.0.52"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9371ade75d4c2d6cb154141b9752cf3781ec9c05e0e5cf35060e1e70ee7b9c25"
+checksum = "a7894c8ed05b7a3a279aeb79025fdec1d3158080b75b98a08faf2806bb799edd"
 dependencies = [
  "indexmap",
  "itoa",
@@ -407,9 +399,9 @@ name = "status-message"
 version = "0.1.0"
 dependencies = [
  "borsh",
- "near-bindgen",
+ "near-sdk",
  "serde",
- "serde_json 1.0.40",
+ "serde_json",
  "wee_alloc",
 ]
 
