@@ -1,6 +1,6 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 use near_sdk::{env, near_bindgen};
-use std::collections::HashMap;
+use near_sdk::collections::Map;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
@@ -8,7 +8,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
-    records: HashMap<String, String>,
+    records: Map<String, String>,
 }
 
 #[near_bindgen]
@@ -16,12 +16,12 @@ impl StatusMessage {
     pub fn set_status(&mut self, message: String) {
         env::log(b"A");
         let account_id = env::signer_account_id();
-        self.records.insert(account_id, message);
+        self.records.insert(&account_id, &message);
     }
 
     pub fn get_status(&self, account_id: String) -> Option<String> {
         env::log(b"A");
-        self.records.get(&account_id).cloned()
+        return self.records.get(&account_id);
     }
 }
 
