@@ -69,7 +69,7 @@ near call $CONTRACT_NAME set_status '{"message": "aloha!"}' --accountId $CONTRAC
 To retrieve the message from the contract, call `get_status` with the following:
 
 ```bash
-near view $CONTRACT_NAME get_status '{"account_id": "'$CONTRACT_NAME'"}' --accountId $CONTRACT_NAME
+near view $CONTRACT_NAME get_status '{"account_id": "'$CONTRACT_NAME'"}'
 ```
 
 ### Standard deploy
