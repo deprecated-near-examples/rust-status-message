@@ -1,6 +1,6 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 use near_sdk::{env, near_bindgen};
-use near_sdk::collections::Map;
+use near_sdk::collections::UnorderedMap;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
@@ -8,7 +8,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
-    records: Map<String, String>,
+    records: UnorderedMap<String, String>,
 }
 
 #[near_bindgen]
