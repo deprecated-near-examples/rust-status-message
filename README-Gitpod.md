@@ -59,3 +59,6 @@ To test run:
 ```bash
 cargo test --package status-message -- --nocapture
 ```
+
+## Data collection
+By using Gitpod in this project, you agree to opt-in to basic, anonymous analytics. No personal information is transmitted. Instead, these usage statistics aid in discovering potential bugs and user flow information.
