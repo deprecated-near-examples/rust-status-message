@@ -10,16 +10,16 @@ This smart contract saves and records the status messages of NEAR accounts that 
 Windows users: please visit the [Windows-specific README file](README-Windows.md).
 
 ## Prerequisite
-Ensure `near-shell` is installed by running:
+Ensure `near-cli` is installed by running:
 
 ```
 near --version
 ```
 
-If needed, install `near-shell`:
+If needed, install `near-cli`:
 
 ```
-npm install near-shell -g
+npm install near-cli -g
 ```
 
 ## Building this contract
@@ -77,7 +77,7 @@ In this second option, the smart contract will get deployed to a specific accoun
 
 If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
 
-In the project root, login with `near-shell` by following the instructions after this command:
+In the project root, login with `near-cli` by following the instructions after this command:
 
 ```
 near login
