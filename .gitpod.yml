@@ -23,7 +23,7 @@ github:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - before: nvm use default
-    init: npm install near-shell -g --no-optional
+    init: npm install near-cli -g --no-optional
     command: gp open README-Gitpod.md && near dev-deploy --wasmFile ./res/status_message.wasm && source ./neardev/dev-account.env
 
 vscode:
