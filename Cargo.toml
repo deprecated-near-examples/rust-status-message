@@ -10,9 +10,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
-borsh = "*"
 near-sdk = "2.0.1"
-wee_alloc = { version = "0.4.5", default-features = false, features = [] }
 
 [profile.release]
 codegen-units = 1
