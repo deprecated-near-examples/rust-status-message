@@ -22,5 +22,9 @@
     "url": "https://github.com/near-examples/rust-status-message/issues"
   },
   "homepage": "https://github.com/near-examples/rust-status-message#readme",
+  "dependencies": {
+    "borsh": "^0.4.0",
+    "near-api-js": "near/near-api-js#bace1ee"
+  },
   "devDependencies": {}
 }
