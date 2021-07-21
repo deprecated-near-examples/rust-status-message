@@ -4,6 +4,11 @@ use near_sdk::{env, near_bindgen};
 
 near_sdk::setup_alloc!();
 
+#[derive(BorshDeserialize, BorshSerialize)]
+pub struct OldStatusMessage {
+    records: LookupMap<String, String>,
+}
+
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
@@ -38,6 +43,16 @@ impl StatusMessage {
 
     pub fn get_bio(&self, account_id: String) -> Option<String> {
         return self.bios.get(&account_id);
+    }
+
+    #[private]
+    #[init(ignore_state)]
+    pub fn migrate() -> Self {
+        let old_state: OldStatusMessage = env::state_read().expect("failed");
+        Self {
+            taglines: old_state.records,
+            bios: LookupMap::new(b"b".to_vec()),
+        }
     }
 }
 
