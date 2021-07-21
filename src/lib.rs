@@ -4,29 +4,55 @@ use near_sdk::{env, near_bindgen};
 
 near_sdk::setup_alloc!();
 
+#[derive(BorshDeserialize, BorshSerialize)]
+pub struct OldStatusMessage {
+    records: LookupMap<String, String>,
+}
+
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
-    records: LookupMap<String, String>,
+    taglines: LookupMap<String, String>,
+    bios: LookupMap<String, String>,
 }
 
 impl Default for StatusMessage {
     fn default() -> Self {
         Self {
-            records: LookupMap::new(b"r".to_vec()),
+            taglines: LookupMap::new(b"r".to_vec()),
+            bios: LookupMap::new(b"b".to_vec()),
         }
     }
 }
 
 #[near_bindgen]
 impl StatusMessage {
-    pub fn set_status(&mut self, message: String) {
+    pub fn set_tagline(&mut self, message: String) {
         let account_id = env::signer_account_id();
-        self.records.insert(&account_id, &message);
+        self.taglines.insert(&account_id, &message);
     }
 
-    pub fn get_status(&self, account_id: String) -> Option<String> {
-        return self.records.get(&account_id);
+    pub fn get_tagline(&self, account_id: String) -> Option<String> {
+        return self.taglines.get(&account_id);
+    }
+
+    pub fn set_bio(&mut self, message: String) {
+        let account_id = env::signer_account_id();
+        self.bios.insert(&account_id, &message);
+    }
+
+    pub fn get_bio(&self, account_id: String) -> Option<String> {
+        return self.bios.get(&account_id);
+    }
+
+    #[private]
+    #[init(ignore_state)]
+    pub fn migrate() -> Self {
+        let old_state: OldStatusMessage = env::state_read().expect("failed");
+        Self {
+            taglines: old_state.records,
+            bios: LookupMap::new(b"b".to_vec()),
+        }
     }
 }
 
@@ -59,22 +85,42 @@ mod tests {
     }
 
     #[test]
-    fn set_get_message() {
+    fn set_get_tagline() {
         let context = get_context(vec![], false);
         testing_env!(context);
         let mut contract = StatusMessage::default();
-        contract.set_status("hello".to_string());
+        contract.set_tagline("hello".to_string());
         assert_eq!(
             "hello".to_string(),
-            contract.get_status("bob_near".to_string()).unwrap()
+            contract.get_tagline("bob_near".to_string()).unwrap()
         );
     }
 
     #[test]
-    fn get_nonexistent_message() {
+    fn get_nonexistent_tagline() {
         let context = get_context(vec![], true);
         testing_env!(context);
         let contract = StatusMessage::default();
-        assert_eq!(None, contract.get_status("francis.near".to_string()));
+        assert_eq!(None, contract.get_tagline("francis.near".to_string()));
+    }
+
+    #[test]
+    fn set_get_bio() {
+        let context = get_context(vec![], false);
+        testing_env!(context);
+        let mut contract = StatusMessage::default();
+        contract.set_bio("hello".to_string());
+        assert_eq!(
+            "hello".to_string(),
+            contract.get_bio("bob_near".to_string()).unwrap()
+        );
+    }
+
+    #[test]
+    fn get_nonexistent_bio() {
+        let context = get_context(vec![], true);
+        testing_env!(context);
+        let contract = StatusMessage::default();
+        assert_eq!(None, contract.get_bio("francis.near".to_string()));
     }
 }
