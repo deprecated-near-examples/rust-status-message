@@ -28,6 +28,6 @@
     "near-api-js": "near/near-api-js#bace1ee"
   },
   "devDependencies": {
-    "near-sandbox": "near/sandbox#mvp"
+    "near-sandbox": "^0.0.3"
   }
 }
