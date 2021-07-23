@@ -2,6 +2,7 @@ const nearAPI = require("near-api-js");
 const BN = require("bn.js");
 const fs = require("fs").promises;
 const assert = require("assert").strict;
+const {runServer} = require("near-sandbox/runner")
 
 function getConfig(env) {
   switch (env) {
@@ -29,6 +30,7 @@ let keyStore;
 let near;
 
 async function initNear() {
+  const server = await runServer();
   config = getConfig(process.env.NEAR_ENV || "sandbox");
   const keyFile = require(config.keyPath);
   masterKey = nearAPI.utils.KeyPair.fromString(
@@ -46,6 +48,7 @@ async function initNear() {
   });
   masterAccount = new nearAPI.Account(near.connection, config.masterAccount);
   console.log("Finish init NEAR");
+  return server;
 }
 
 async function createContractUser(
@@ -95,7 +98,7 @@ async function initTest() {
 
 async function test() {
   // 1. Creates testing accounts and deploys a contract
-  await initNear();
+  const server = await initNear();
   const { aliceUseContract, bobUseContract } = await initTest();
 
   // 2. Performs a `set_status` transaction signed by Alice and then calls `get_status` to confirm `set_status` worked
@@ -121,6 +124,8 @@ async function test() {
     account_id: "alice.test.near",
   });
   assert.equal(alice_message, "hello");
+
+  server.close();
 }
 
 test();
