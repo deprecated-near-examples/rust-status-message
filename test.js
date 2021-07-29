@@ -2,7 +2,8 @@ const nearAPI = require("near-api-js");
 const BN = require("bn.js");
 const fs = require("fs").promises;
 const assert = require("assert").strict;
-const {runServer} = require("near-sandbox/runner")
+const {createSandbox} = require("near-sandbox-runner")
+const {join} = require("path");
 
 function getConfig(env) {
   switch (env) {
@@ -10,7 +11,7 @@ function getConfig(env) {
     case "local":
       return {
         networkId: "sandbox",
-        nodeUrl: "http://localhost:3030",
+        nodeUrl: "http://localhost:3000",
         masterAccount: "test.near",
         contractAccount: "status-message.test.near",
         keyPath: "/tmp/near-sandbox/validator_key.json",
@@ -29,9 +30,9 @@ let pubKey;
 let keyStore;
 let near;
 
-async function initNear() {
-  const server = await runServer();
+async function initNear(server) {
   config = getConfig(process.env.NEAR_ENV || "sandbox");
+  config.keyPath = join(server.homeDir, "validator_key.json");
   const keyFile = require(config.keyPath);
   masterKey = nearAPI.utils.KeyPair.fromString(
     keyFile.secret_key || keyFile.private_key
@@ -48,7 +49,6 @@ async function initNear() {
   });
   masterAccount = new nearAPI.Account(near.connection, config.masterAccount);
   console.log("Finish init NEAR");
-  return server;
 }
 
 async function createContractUser(
@@ -72,7 +72,8 @@ async function createContractUser(
   return accountUseContract;
 }
 
-async function initTest() {
+async function initTest(sandbox) {
+  sandbox.create
   const contract = await fs.readFile("./res/status_message.wasm");
   const _contractAccount = await masterAccount.createAndDeployContract(
     config.contractAccount,
@@ -96,36 +97,74 @@ async function initTest() {
   return { aliceUseContract, bobUseContract };
 }
 
+
+// let withServer = serverBuilder()
+
+// beforeAll(() => {
+//   server.doThing()
+// })
+
+// afterAll(() => {
+//   server.close()
+// })
+
+const sandboxConfig = {
+  homedir: "~/.near/sandbox/this-repo",
+  min_gas_price: "0",
+};
+
+const ALICE = "alice.test.near";
+const BOB = "bob.test.near";
+const CONTRACT = "status-message.test.near";
+
 async function test() {
+  let sandboxRunner = await createSandbox(async (sandbox) => {
+    await sandbox.createAndDeploy(CONTRACT,
+      "./res/status_message.wasm",
+      new BN(10).pow(new BN(25)));
+    await sandbox.createAccount(ALICE);
+    await sandbox.createAccount(BOB);
+  })
+  await sandboxRunner(async (sandbox) => {
+    const alice = sandbox.getAccount(ALICE);
+    const bob = sandbox.getAccount(BOB);
+    const contract = sandbox.getContractAccount(CONTRACT);
+    await alice.call(CONTRACT, "set_status", { args: { message: "hello"} })
+    console.log(contract.view("get_status", {account_id: 'alice.test.near'}))
+    
+  })
+  // await withServer(sandboxConfig, ({ server, config }) => {
+  //   server.createAndDeployContract();
+    // near.createAccount(`alice.${near.root}`, { accountId: "sandbox" })
+  // })
   // 1. Creates testing accounts and deploys a contract
-  const server = await initNear();
-  const { aliceUseContract, bobUseContract } = await initTest();
+  // await initNear(sandbox);
+  // const { aliceUseContract, bobUseContract } = await initTest();
 
-  // 2. Performs a `set_status` transaction signed by Alice and then calls `get_status` to confirm `set_status` worked
-  await aliceUseContract.set_status({ args: { message: "hello" } });
-  let alice_message = await aliceUseContract.get_status({
-    account_id: "alice.test.near",
-  });
-  assert.equal(alice_message, "hello");
+  // // 2. Performs a `set_status` transaction signed by Alice and then calls `get_status` to confirm `set_status` worked
+  // await aliceUseContract.set_status({ args: { message: "hello" } });
+  // let alice_message = await aliceUseContract.get_status({
+  //   account_id: "alice.test.near",
+  // });
+  // assert.equal(alice_message, "hello");
 
-  // 3. Gets Bob's status and which should be `null` as Bob has not yet set status
-  let bob_message = await bobUseContract.get_status({
-    account_id: "bob.test.near",
-  });
-  assert.equal(bob_message, null);
+  // // 3. Gets Bob's status and which should be `null` as Bob has not yet set status
+  // let bob_message = await bobUseContract.get_status({
+  //   account_id: "bob.test.near",
+  // });
+  // assert.equal(bob_message, null);
 
-  // 4. Performs a `set_status` transaction signed by Bob and then calls `get_status` to show Bob's changed status and should not affect Alice's status
-  await bobUseContract.set_status({ args: { message: "world" } });
-  bob_message = await bobUseContract.get_status({
-    account_id: "bob.test.near",
-  });
-  assert.equal(bob_message, "world");
-  alice_message = await aliceUseContract.get_status({
-    account_id: "alice.test.near",
-  });
-  assert.equal(alice_message, "hello");
-
-  server.close();
+  // // 4. Performs a `set_status` transaction signed by Bob and then calls `get_status` to show Bob's changed status and should not affect Alice's status
+  // await bobUseContract.set_status({ args: { message: "world" } });
+  // bob_message = await bobUseContract.get_status({
+  //   account_id: "bob.test.near",
+  // });
+  // assert.equal(bob_message, "world");
+  // alice_message = await aliceUseContract.get_status({
+  //   account_id: "alice.test.near",
+  // });
+  // assert.equal(alice_message, "hello");
 }
 
-test();
+
+test()
