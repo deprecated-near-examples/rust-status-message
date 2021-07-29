@@ -2,8 +2,8 @@ const nearAPI = require("near-api-js");
 const BN = require("bn.js");
 const fs = require("fs").promises;
 const assert = require("assert").strict;
-const {createSandbox} = require("near-sandbox-runner")
-const {join} = require("path");
+const { createSandbox } = require("near-sandbox-runner")
+const { join } = require("path");
 
 function getConfig(env) {
   switch (env) {
@@ -118,24 +118,27 @@ const BOB = "bob.test.near";
 const CONTRACT = "status-message.test.near";
 
 async function test() {
-  let sandboxRunner = await createSandbox(async (sandbox) => {
-    await sandbox.createAndDeploy(CONTRACT,
+  console.log('about to set up sandboxRunner')
+  let sandboxRunner = await createSandbox(async sandbox => {
+    await sandbox.createAndDeploy(
+      CONTRACT,
       "./res/status_message.wasm",
-      new BN(10).pow(new BN(25)));
+      new BN(10).pow(new BN(25))
+    );
     await sandbox.createAccount(ALICE);
     await sandbox.createAccount(BOB);
   })
+  console.log('set it up; here it is: ', sandboxRunner)
   await sandboxRunner(async (sandbox) => {
     const alice = sandbox.getAccount(ALICE);
     const bob = sandbox.getAccount(BOB);
     const contract = sandbox.getContractAccount(CONTRACT);
-    await alice.call(CONTRACT, "set_status", { args: { message: "hello"} })
-    console.log(contract.view("get_status", {account_id: 'alice.test.near'}))
-    
+    await alice.call(CONTRACT, "set_status", { args: { message: "hello" } })
+    console.log(await contract.view("get_status", { account_id: 'alice.test.near' }))
   })
   // await withServer(sandboxConfig, ({ server, config }) => {
   //   server.createAndDeployContract();
-    // near.createAccount(`alice.${near.root}`, { accountId: "sandbox" })
+  // near.createAccount(`alice.${near.root}`, { accountId: "sandbox" })
   // })
   // 1. Creates testing accounts and deploys a contract
   // await initNear(sandbox);
