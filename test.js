@@ -118,7 +118,6 @@ const BOB = "bob.test.near";
 const CONTRACT = "status-message.test.near";
 
 async function test() {
-  console.log('about to set up sandboxRunner')
   let sandboxRunner = await createSandbox(async sandbox => {
     await sandbox.createAndDeploy(
       CONTRACT,
@@ -128,14 +127,14 @@ async function test() {
     await sandbox.createAccount(ALICE);
     await sandbox.createAccount(BOB);
   })
-  console.log('set it up; here it is: ', sandboxRunner)
   await sandboxRunner(async (sandbox) => {
     const alice = sandbox.getAccount(ALICE);
     const bob = sandbox.getAccount(BOB);
     const contract = sandbox.getContractAccount(CONTRACT);
-    console.log(await alice.call(CONTRACT, "set_status", { message: "hello"}))
-    console.log(await contract.view("get_status", {account_id: 'alice.test.near'}))
-    
+    const message = "hello"
+    await alice.call(CONTRACT, "set_status", { message })
+    const { result } = await contract.view("get_status", { account_id: 'alice.test.near' })
+    assert.equal(result, message);
   })
   // await withServer(sandboxConfig, ({ server, config }) => {
   //   server.createAndDeployContract();
