@@ -133,8 +133,9 @@ async function test() {
     const alice = sandbox.getAccount(ALICE);
     const bob = sandbox.getAccount(BOB);
     const contract = sandbox.getContractAccount(CONTRACT);
-    await alice.call(CONTRACT, "set_status", { args: { message: "hello" } })
-    console.log(await contract.view("get_status", { account_id: 'alice.test.near' }))
+    console.log(await alice.call(CONTRACT, "set_status", { message: "hello"}))
+    console.log(await contract.view("get_status", {account_id: 'alice.test.near'}))
+    
   })
   // await withServer(sandboxConfig, ({ server, config }) => {
   //   server.createAndDeployContract();
