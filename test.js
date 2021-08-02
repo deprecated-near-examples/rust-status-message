@@ -24,7 +24,7 @@ async function testAliceSetsStatus(sandboxRunner) {
     const alice = sandbox.getAccount(ALICE);
     const contract = sandbox.getContractAccount(CONTRACT);
     await alice.call(CONTRACT, "set_status", { message: "hello" })
-    const { result } = await contract.view("get_status", { account_id: ALICE })
+    const result = await contract.view("get_status", { account_id: ALICE })
     assert.equal(result, "hello");
   })
 }
@@ -33,7 +33,7 @@ async function testAliceSetsStatus(sandboxRunner) {
 async function testDefaultStatus(sandboxRunner) {
   await sandboxRunner(async sandbox => {
     const contract = sandbox.getContractAccount(CONTRACT);
-    const { result } = await contract.view("get_status", { account_id: BOB })
+    const result = await contract.view("get_status", { account_id: BOB })
     assert.equal(result, null)
   })
 }
@@ -44,13 +44,13 @@ async function testStatusPerAccount(sandboxRunner) {
     const bob = sandbox.getAccount(BOB);
     const contract = sandbox.getContractAccount(CONTRACT);
     await bob.call(CONTRACT, "set_status", { message: "world" })
-    const { result: bobStatus } = await contract.view(
+    const bobStatus = await contract.view(
       "get_status",
       { account_id: BOB }
     )
     assert.equal(bobStatus, "world");
 
-    const { result: aliceStatus } = await contract.view(
+    const aliceStatus = await contract.view(
       "get_status",
       { account_id: ALICE }
     )
