@@ -25,7 +25,7 @@ async function testAliceSetsStatus(sandboxRunner) {
     const contract = sandbox.getContractAccount(CONTRACT);
     await alice.call(CONTRACT, "set_status", { message: "hello" })
     const { result } = await contract.view("get_status", { account_id: ALICE })
-    assert.equal(result, message);
+    assert.equal(result, "hello");
   })
 }
 
@@ -48,21 +48,23 @@ async function testStatusPerAccount(sandboxRunner) {
       "get_status",
       { account_id: BOB }
     )
-    assert.equal(bobStatus, message);
+    assert.equal(bobStatus, "world");
 
     const { result: aliceStatus } = await contract.view(
       "get_status",
       { account_id: ALICE }
     )
-    assert.notEqual(aliceStatus, message)
+    assert.equal(aliceStatus, null)
   })
 }
 
 async function test() {
   const sandboxRunner = await initSandbox()
-  await testAliceSetsStatus(sandboxRunner)
-  await testDefaultStatus(sandboxRunner)
-  await testStatusPerAccount(sandboxRunner)
+  await Promise.all([
+    testAliceSetsStatus(sandboxRunner),
+    testDefaultStatus(sandboxRunner),
+    testStatusPerAccount(sandboxRunner),
+  ])
   console.log('\x1b[32mPASSED\x1b[0m')
 }
 
