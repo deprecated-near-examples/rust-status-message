@@ -1,5 +1,5 @@
 const assert = require("assert").strict;
-const { createSandbox } = require("near-sandbox-runner")
+const { createSandbox } = require("near-runner")
 
 // sandbox creates sub-accounts of 'test.near'
 const ALICE = "alice.test.near";
