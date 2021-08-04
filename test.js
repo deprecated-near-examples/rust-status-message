@@ -1,5 +1,5 @@
-const assert = require("assert").strict;
-const { createSandbox } = require("near-runner")
+import { strict as assert } from "assert";
+import { createSandbox } from "near-runner"
 
 // sandbox creates sub-accounts of 'test.near'
 const ALICE = "alice.test.near";

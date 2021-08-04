@@ -2,6 +2,7 @@
   "name": "rust-status-message-builder",
   "version": "1.0.0",
   "description": "Compiles NEAR Protocol example of setting and retrieving a status message per NEAR account",
+  "type": "module",
   "scripts": {
     "build": "cargo build --target wasm32-unknown-unknown --release",
     "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/",
