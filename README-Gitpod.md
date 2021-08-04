@@ -7,6 +7,32 @@ This smart contract saves and records the status messages of NEAR accounts that 
 
 ## Using this contract
 
+### Web app
+
+Deploy the smart contract to a specific account created with the NEAR Wallet. Then interact with the smart contract using near-api-js on the frontend.
+
+In the project root, login with `near-cli` by following the instructions after this command:
+
+```
+near login
+```
+
+Deploy the contract to your NEAR account:
+
+```bash
+near deploy --wasmFile res/status_message.wasm --accountId YOUR_ACCOUNT_NAME
+```
+
+Build the frontend:
+
+```bash
+npm start
+```
+
+If all is successful the app should be live at `localhost:1234`!
+
+### CLI
+
 In Gitpod, a process has automatically created a new NEAR account that's useful for a quick (and likely temporary) usage.
 We've set an environment variable in Gitpod with the account name. At the bottom of this screen there's a Terminal.
 
