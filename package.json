@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cargo build --target wasm32-unknown-unknown --release",
     "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/",
-    "test": "node test.js"
+    "test": "cargo test -- --nocapture && node test.js"
   },
   "repository": {
     "type": "git",
