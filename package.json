@@ -29,6 +29,6 @@
     "near-api-js": "near/near-api-js#bace1ee"
   },
   "devDependencies": {
-    "near-runner": "^0.1.2"
+    "near-runner": "0.3.0"
   }
 }

@@ -57,6 +57,15 @@ borsh@^0.4.0:
     bs58 "^4.0.0"
     text-encoding-utf-8 "^1.0.2"
 
+borsh@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/borsh/-/borsh-0.5.0.tgz#d5eed021a34118908d672295819e3c9e44f692ce"
+  integrity sha512-p9w/qGBeeFdUf2GPBPHdX5JQyez8K5VtoFN7PqSfmR+cVUMSmcwAKhP9n2aXoDSKbtS7xZlZt3MVnrJL7GdYhg==
+  dependencies:
+    bn.js "^5.2.0"
+    bs58 "^4.0.0"
+    text-encoding-utf-8 "^1.0.2"
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
@@ -219,23 +228,6 @@ mustache@^4.0.0:
   resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.2.0.tgz#e5892324d60a12ec9c2a73359edca52972bf6f64"
   integrity sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==
 
-near-api-js@^0.42.0:
-  version "0.42.0"
-  resolved "https://registry.yarnpkg.com/near-api-js/-/near-api-js-0.42.0.tgz#1f773791e930a349be65b866752bbae67df4388d"
-  integrity sha512-YtDR0sXHL2CclXZdscqUIjoc4Vp/o09CSY1lQ6mygSNbWp5ghLAR1kNBQnALGGQhYC6NLBCzJQJZMb2IQr2WzA==
-  dependencies:
-    bn.js "5.2.0"
-    borsh "^0.4.0"
-    bs58 "^4.0.0"
-    depd "^2.0.0"
-    error-polyfill "^0.1.2"
-    http-errors "^1.7.2"
-    js-sha256 "^0.9.0"
-    mustache "^4.0.0"
-    node-fetch "^2.6.1"
-    text-encoding-utf-8 "^1.0.2"
-    tweetnacl "^1.0.1"
-
 near-api-js@near/near-api-js#bace1ee:
   version "0.41.0"
   resolved "https://codeload.github.com/near/near-api-js/tar.gz/bace1ee06e2bfb19caf84cdfd9b67a3ce0a63038"
@@ -252,27 +244,41 @@ near-api-js@near/near-api-js#bace1ee:
     text-encoding-utf-8 "^1.0.2"
     tweetnacl "^1.0.1"
 
-near-runner@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/near-runner/-/near-runner-0.1.2.tgz#010d35ba980e4cdae7c48a15dce4168a8f4a9896"
-  integrity sha512-Qu4GZNJzb5Jw1GXlwMtRxePYhoH6pg0LKpgmMGAd435Vc1v7AuAb+6sTgVse2+wDXm6e4wT2oTrGOe5Sw1jqiw==
+near-api-js@near/near-api-js#spike/sandbox-runner-tweaks:
+  version "0.42.0"
+  resolved "https://codeload.github.com/near/near-api-js/tar.gz/e2fd9126e864a01e9812f34094df14ab900b1e5b"
+  dependencies:
+    bn.js "5.2.0"
+    borsh "^0.5.0"
+    bs58 "^4.0.0"
+    depd "^2.0.0"
+    error-polyfill "^0.1.2"
+    http-errors "^1.7.2"
+    js-sha256 "^0.9.0"
+    mustache "^4.0.0"
+    node-fetch "^2.6.1"
+    text-encoding-utf-8 "^1.0.2"
+    tweetnacl "^1.0.1"
+
+near-runner@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/near-runner/-/near-runner-0.3.0.tgz#4ce204cbdbf684db72a339cf4d6b73eeccf01eb9"
+  integrity sha512-hfWQ4aqHe4mZNdWJPocIwZKomRYyi22Fcr9FkeabO8ifzOiYs3avB7+yccWBHbHB74KDadZdpv3WMsbTnFkiGg==
   dependencies:
     bn.js "^5.2.0"
     fs-extra "^10.0.0"
-    near-api-js "^0.42.0"
-    near-sandbox "0.0.3"
+    near-api-js near/near-api-js#spike/sandbox-runner-tweaks
+    near-sandbox "^0.0.5"
     promisify-child-process "^4.1.1"
     rimraf "^3.0.2"
     temp-dir "^2.0.0"
 
-near-sandbox@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/near-sandbox/-/near-sandbox-0.0.3.tgz#8591fa68c3b948e437a2d494e62fbc667c8ee023"
-  integrity sha512-tzxJ9HKMZOLvnByu78edIfnLkRJdbcTqpotrtNu0yssjjlFi7gAGXbu4DChIHdYxWJlQYxiGhoBUOnnmiKJJyg==
+near-sandbox@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/near-sandbox/-/near-sandbox-0.0.5.tgz#72b53907408f9bb72fc2d766465b4964fca18b2b"
+  integrity sha512-za74tz1yyIz3EjWYT5z5gYX3jTN0NxN1W8rB2lbRHQfNXPTIUNtipQSkyzAo6cNsrJsxmT1x1cypblnTITcVcQ==
   dependencies:
     binary-install "^0.1.1"
-    promisify-child-process "^4.1.1"
-    rimraf "^3.0.2"
 
 node-fetch@^2.6.1:
   version "2.6.1"
