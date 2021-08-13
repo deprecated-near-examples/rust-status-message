@@ -30,6 +30,12 @@ If needed, install `Rust`:
 curl https://sh.rustup.rs -sSf | sh
 ```
 
+Install dependencies
+
+```
+npm install
+```
+
 ## Building this contract
 To make the build process compatible with multiple operating systems, the build process exists as a script in `package.json`.
 There are a number of special flags used to compile the smart contract into the wasm file.
