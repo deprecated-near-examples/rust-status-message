@@ -67,7 +67,7 @@ Deploy the smart contract to a specific account created with the NEAR Wallet. Th
 
 If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
 
-In the project root, login with `near-cli` by following the instructions after this command:
+Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
 
 ```
 near login
@@ -137,7 +137,7 @@ In this option, the smart contract will get deployed to a specific account creat
 
 If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
 
-In the project root, login with `near-cli` by following the instructions after this command:
+Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
 
 ```
 near login

@@ -110,6 +110,7 @@ button {
   transition: top 50ms;
   &:hover, &:focus {
     top: -1px;
+    cursor: pointer;
   }
   &:active {
     background: var(--secondary);
