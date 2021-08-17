@@ -5,7 +5,7 @@ This smart contract saves and records the status messages of NEAR accounts that 
 
 **Note**: this README is specific to Windows and this example. For development on OS X or Linux, please see [README.md](README.md).
 
-## Prerequisite
+## Prerequisites
 Ensure `near-cli` is installed by running:
 
 ```
@@ -16,6 +16,24 @@ If needed, install `near-cli`:
 
 ```
 npm install near-cli -g
+```
+
+Ensure `Rust` is installed by running:
+
+```
+rustc --version
+```
+
+If needed, install `Rust`:
+
+```
+curl https://sh.rustup.rs -sSf | sh
+```
+
+Install dependencies
+
+```
+npm install
 ```
 
 ## Building this contract
@@ -31,7 +49,43 @@ npm run build
 yarn build
 ```
 
+### Important
+If you encounter an error similar to:
+>note: the `wasm32-unknown-unknown` target may not be installed
+
+Then run:
+
+```bash
+rustup target add wasm32-unknown-unknown
+```
+
 ## Using this contract
+
+### Web app
+
+Deploy the smart contract to a specific account created with the NEAR Wallet. Then interact with the smart contract using near-api-js on the frontend.
+
+If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
+
+Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
+
+```
+near login
+```
+
+Deploy the contract to your NEAR account:
+
+```bash
+near deploy --wasmFile res/status_message.wasm --accountId YOUR_ACCOUNT_NAME
+```
+
+Build the frontend:
+
+```bash
+npm start
+```
+
+If all is successful the app should be live at `localhost:1234`!
 
 ### Quickest deploy
 Build and deploy this smart contract to an development account. This development account will be created automatically and is not intended to be permanent. Please see the "Standard deploy" section for creating a more personalized account to deploy to.
@@ -79,11 +133,11 @@ near view %CONTRACT_NAME% get_status "{\"account_id\": \""%CONTRACT_NAME%"\"}" -
 ```
 
 ### Standard deploy
-In this second option, the smart contract will get deployed to a specific account created with the NEAR Wallet.
+In this option, the smart contract will get deployed to a specific account created with the NEAR Wallet.
 
 If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
 
-In the project root, login with `near-cli` by following the instructions after this command:
+Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
 
 ```
 near login

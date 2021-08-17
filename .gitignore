@@ -1,5 +1,8 @@
 # Build files
 target
+.cache
+.parcel-cache
+dist
 
 # IDE
 .idea
