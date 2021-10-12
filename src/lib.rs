@@ -1,13 +1,12 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LookupMap;
-use near_sdk::{env, near_bindgen};
+use near_sdk::{AccountId, env, near_bindgen};
 
-near_sdk::setup_alloc!();
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize)]
 pub struct StatusMessage {
-    records: LookupMap<String, String>,
+    records: LookupMap<AccountId, String>,
 }
 
 impl Default for StatusMessage {
@@ -25,8 +24,8 @@ impl StatusMessage {
         self.records.insert(&account_id, &message);
     }
 
-    pub fn get_status(&self, account_id: String) -> Option<String> {
-        return self.records.get(&account_id);
+    pub fn get_status(&self, account_id: AccountId) -> Option<String> {
+        self.records.get(&account_id)
     }
 }
 
@@ -34,7 +33,6 @@ impl StatusMessage {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use near_sdk::MockedBlockchain;
     use near_sdk::{testing_env, VMContext};
 
     fn get_context(input: Vec<u8>, is_view: bool) -> VMContext {
@@ -66,7 +64,7 @@ mod tests {
         contract.set_status("hello".to_string());
         assert_eq!(
             "hello".to_string(),
-            contract.get_status("bob_near".to_string()).unwrap()
+            contract.get_status("bob_near".parse::<AccountId>().unwrap()).unwrap()
         );
     }
 
@@ -75,6 +73,6 @@ mod tests {
         let context = get_context(vec![], true);
         testing_env!(context);
         let contract = StatusMessage::default();
-        assert_eq!(None, contract.get_status("francis.near".to_string()));
+        assert_eq!(None, contract.get_status("francis.near".parse().unwrap()));
     }
 }
