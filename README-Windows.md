@@ -65,7 +65,7 @@ rustup target add wasm32-unknown-unknown
 
 Deploy the smart contract to a specific account created with the NEAR Wallet. Then interact with the smart contract using near-api-js on the frontend.
 
-If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
+If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.testnet.near.org).
 
 Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
 
@@ -135,7 +135,7 @@ near view %CONTRACT_NAME% get_status "{\"account_id\": \""%CONTRACT_NAME%"\"}" -
 ### Standard deploy
 In this option, the smart contract will get deployed to a specific account created with the NEAR Wallet.
 
-If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.nearprotocol.com).
+If you do not have a NEAR account, please create one with [NEAR Wallet](https://wallet.testnet.near.org).
 
 Make sure you have credentials saved locally for the account you want to deploy the contract to. To perform this run the following `near-cli` command:
 
