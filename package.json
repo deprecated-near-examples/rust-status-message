@@ -7,6 +7,7 @@
     "build:web": "parcel build ./frontend/index.html --public-url ./ --no-minify",
     "deploy:dev": "npm run build && near dev-deploy res/status_message.wasm",
     "dev": "npm run deploy:dev && npm start",
+    "test-ava": "./test.sh",
     "start": "npm run build && npm run build:web && env-cmd -f ./neardev/dev-account.env parcel ./frontend/index.html",
     "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/"
   },
