@@ -25,7 +25,7 @@ async fn set_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &wo
         Ok(())
 }
 
-async fn view_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &workspaces::Contract, account_id: &workspaces::AccountId) -> anyhow::Result<String>{
+async fn view_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &workspaces::Contract, account_id: &workspaces::AccountId) -> anyhow::Result<Option<String>>{
     contract
         .view(
             &worker,
@@ -41,14 +41,23 @@ async fn view_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &w
 }
 
 #[tokio::test]
-async fn test_status_message() -> anyhow::Result<()> {
-    let message = "hello world!";
+async fn set_get_message() -> anyhow::Result<()> {
     let (worker, contract) = setup().await?;
+    let message = "hello world!";
     set_message(&worker, &contract, message).await?;
 
-    let result: String = view_message(&worker, &contract, &contract.id()).await?;
+    let result: Option<String> = view_message(&worker, &contract, &contract.id()).await?;
 
     println!("status: {:?}", result);
-    assert_eq!(result, message);
+    assert_eq!(result.unwrap(), message);
+    Ok(())
+}
+
+#[tokio::test]
+async fn get_nonexistent_message() -> anyhow::Result<()> {
+    let (worker, contract) = setup().await?;
+    let result: Option<String> = view_message(&worker, &contract, &contract.id()).await?;
+    println!("status: {:?}", result);
+    assert_eq!(result, None);
     Ok(())
 }
