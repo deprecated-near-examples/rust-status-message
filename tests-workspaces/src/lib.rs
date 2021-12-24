@@ -2,7 +2,7 @@
 
 use serde_json::json;
 use workspaces::prelude::*;
-use workspaces::{Contract, DevNetwork, Network, Worker};
+use workspaces::DevNetwork;
 
 const STATUS_MSG_WASM_FILEPATH: &str = "../res/status_message.wasm";
 
@@ -13,7 +13,11 @@ async fn setup() -> anyhow::Result<(workspaces::Worker<impl DevNetwork>, workspa
     Ok((worker, contract))
 }
 
-async fn set_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &workspaces::Contract, message: &str) -> anyhow::Result<()> {
+async fn set_message(
+    worker: &workspaces::Worker<impl DevNetwork>,
+    contract: &workspaces::Contract,
+    message: &str,
+) -> anyhow::Result<()> {
     let outcome = contract
         .call(&worker, "set_status")
         .args_json(json!({
@@ -21,11 +25,15 @@ async fn set_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &wo
         }))?
         .transact()
         .await?;
-        println!("set_status: {:?}", outcome);
-        Ok(())
+    println!("set_status: {:?}", outcome);
+    Ok(())
 }
 
-async fn view_message(worker: &workspaces::Worker<impl DevNetwork>, contract: &workspaces::Contract, account_id: &workspaces::AccountId) -> anyhow::Result<Option<String>>{
+async fn view_message(
+    worker: &workspaces::Worker<impl DevNetwork>,
+    contract: &workspaces::Contract,
+    account_id: &workspaces::AccountId,
+) -> anyhow::Result<Option<String>> {
     contract
         .view(
             &worker,
