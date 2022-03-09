@@ -24,3 +24,4 @@ overflow-checks = true
 
 [workspace]
 members = []
+exclude = ["tests-workspaces"]
