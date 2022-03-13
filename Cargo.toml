@@ -10,7 +10,6 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
-near-contract-standards = "=4.0.0-pre.7"
 near-sdk = { version = "=4.0.0-pre.7" }
 
 [profile.release]
