@@ -22,12 +22,11 @@ github:
 
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - before: echo "nvm use default" >> ~/.bashrc && npm install -g near-cli && nvm use default
+  - before: echo "nvm use default" >> ~/.bashrc && nvm use default && yarn global add near-cli
     init: yarn && yarn dev
     command: source ~/.bashrc; gp open README-Gitpod.md && yarn dev
 
 vscode:
   extensions:
-    - hbenl.vscode-test-explorer@2.15.0:koqDUMWDPJzELp/hdS/lWw==
     - Swellaby.vscode-rust-test-adapter@0.11.0:Xg+YeZZQiVpVUsIkH+uiiw==
     - bungcip.better-toml@0.3.2:3QfgGxxYtGHfJKQU7H0nEw==
