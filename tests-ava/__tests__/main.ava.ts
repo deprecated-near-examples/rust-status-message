@@ -1,28 +1,40 @@
-import {Workspace} from 'near-workspaces-ava';
+import {Worker, NEAR, NearAccount} from 'near-workspaces';
+import anyTest, {TestFn} from 'ava';
 
-const workspace = Workspace.init(async ({root}) => {
-  const alice = await root.createAccount('alice');
+const test = anyTest as TestFn<{
+  worker: Worker;
+  accounts: Record<string, NearAccount>;
+}>;
 
-  // Create a subaccount of the root account, and also deploy a contract to it
+test.beforeEach(async t => {
+  const worker = await Worker.init();
+  const root = worker.rootAccount;
   const contract = await root.createAndDeploy(
-    // Subaccount name
-    'status-message',
-    // Relative path (from package.json location) to the compiled contract file
-    // which will be deployed to this account
-    '../res/status_message.wasm',
+    root.getSubAccount('status-message').accountId,
+    '../../res/status_message.wasm',
+    {initialBalance: NEAR.parse('3 N').toJSON()},
   );
+  const alice = await root.createSubAccount('alice', {initialBalance: NEAR.parse('3 N').toJSON()});
 
-  return {alice, contract};
+  t.context.worker = worker;
+  t.context.accounts = {root, contract, alice};
 });
-workspace.test('set get message', async(test, {alice, contract, root})=>{
+
+test.afterEach(async t => {
+  await t.context.worker.tearDown().catch(error => {
+    console.log('Failed to stop the Sandbox:', error);
+  });
+});
+
+test('set get message', async t => {
+  const {alice, contract} = t.context.accounts;
   await alice.call(contract, 'set_status', {message: 'hello'});
   const aliceStatus = await contract.view('get_status', {account_id: alice});
-
-  test.is(aliceStatus, 'hello');
+  t.is(aliceStatus, 'hello');
 });
 
-workspace.test('get nonexistent message', async (test, {alice, contract, root})=>{
+test('get message not existing message', async t => {
+  const {root, contract} = t.context.accounts;
   const message: null = await contract.view('get_status', {account_id: root});
-
-  test.is(message, null);
+  t.is(message, null);
 });

@@ -1,1 +1,1 @@
-module.exports = require('near-workspaces-ava/ava.config.cjs');
+module.exports = require('./ava.config.cjs');

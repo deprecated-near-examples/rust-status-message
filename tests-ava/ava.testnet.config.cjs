@@ -1,5 +1,5 @@
 module.exports = {
-  ...require('near-workspaces-ava/ava.testnet.config.cjs'),
+  ...require('./ava.testnet.config.cjs'),
   ...require('./ava.config.cjs'),
 };
 
