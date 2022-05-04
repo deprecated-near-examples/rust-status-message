@@ -55,3 +55,12 @@ test("get nonexistent message", async (t) => {
   });
   t.is(message, null);
 });
+
+test("root and alice have different statuses", async (t) => {
+  const { root, contract, alice } = t.context.accounts;
+  await root.call(contract, "set_status", { message: "world" });
+  const rootStatus = await contract.view("get_status", { account_id: root });
+  t.is(rootStatus, "world");
+  const aliceStatus = await contract.view("get_status", { account_id: alice });
+  t.is(aliceStatus, null);
+});
