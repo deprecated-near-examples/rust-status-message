@@ -5,6 +5,7 @@ target
 dist
 *.lock
 package-lock.json
+res/**
 
 # IDE
 .idea
