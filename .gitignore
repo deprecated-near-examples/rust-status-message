@@ -3,6 +3,8 @@ target
 .cache
 .parcel-cache
 dist
+*.lock
+package-lock.json
 
 # IDE
 .idea
@@ -15,3 +17,4 @@ neardev
 
 # Dependencies
 node_modules
+*/target
