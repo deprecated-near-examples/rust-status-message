@@ -20,3 +20,7 @@ pkg-config = "0.3.1"
 [[example]]
 name = "set"
 path = "src/set.rs"
+
+[[example]]
+name = "null"
+path = "src/null.rs"
