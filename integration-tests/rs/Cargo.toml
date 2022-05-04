@@ -24,3 +24,7 @@ path = "src/set.rs"
 [[example]]
 name = "null"
 path = "src/null.rs"
+
+[[example]]
+name = "statuses"
+path = "src/statuses.rs"

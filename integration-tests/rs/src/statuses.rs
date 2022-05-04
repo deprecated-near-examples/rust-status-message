@@ -20,14 +20,30 @@ async fn main() -> anyhow::Result<()> {
     .into_result()?;
 
     // begin test
-    let alice_status: Option<String> = owner
+    alice
+        .call(&worker, contract.id(), "set_status")
+        .args_json(json!({ "message": "world" }))?
+        .transact()
+        .await?;
+    
+    let alice_status: String = owner
         .call(&worker, contract.id(), "get_status")
         .args_json(json!({ "account_id": alice.id() }))?
         .transact()
         .await?
         .json()?;
 
-    assert_eq!(alice_status, None);
+    assert_eq!(alice_status, "world");
+
+    let owner_status: Option<String> = owner
+    .call(&worker, contract.id(), "get_status")
+    .args_json(json!({ "account_id": owner.id() }))?
+    .transact()
+    .await?
+    .json()?;
+
+    assert_eq!(owner_status, None);
+
     println!("Passed ✅");
     Ok(())
 }
