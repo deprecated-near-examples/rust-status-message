@@ -11,7 +11,7 @@ test.beforeEach(async t => {
   const root = worker.rootAccount;
   const contract = await root.createAndDeploy(
     root.getSubAccount('status-message').accountId,
-    '../../res/status_message.wasm',
+    './res/status_message.wasm',
     {initialBalance: NEAR.parse('3 N').toJSON()},
   );
   const alice = await root.createSubAccount('alice', {initialBalance: NEAR.parse('3 N').toJSON()});
