@@ -12,7 +12,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "cargo test -- --nocapture",
     "test:integration": "npm run build && npm run postbuild && npm run test:integration:rs && npm run test:integration:ts",
-    "test:integration:rs": "cd integration-tests/rs && cargo run --example set && cargo run --example null && cargo run --example statuses",
+    "test:integration:rs": "cd integration-tests/rs && cargo run --example integration-tests",
     "test:integration:ts": "ava --verbose"
   },
   "repository": {

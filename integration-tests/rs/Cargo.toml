@@ -18,13 +18,5 @@ workspaces = "0.2.1"
 pkg-config = "0.3.1"
 
 [[example]]
-name = "set"
-path = "src/set.rs"
-
-[[example]]
-name = "null"
-path = "src/null.rs"
-
-[[example]]
-name = "statuses"
-path = "src/statuses.rs"
+name = "integration-tests"
+path = "src/tests.rs"
