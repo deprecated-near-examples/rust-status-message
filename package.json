@@ -11,9 +11,9 @@
     "start": "npm run build && npm run build:web && env-cmd -f ./neardev/dev-account.env parcel ./frontend/index.html",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "cargo test -- --nocapture",
-    "test:integration": "npm run build && npm run postbuild && npm run test:integration:rs && npm run test:integration:ts",
-    "test:integration:rs": "cd integration-tests/rs && cargo run --example integration-tests",
-    "test:integration:ts": "ava --verbose"
+    "test:integration": "npm run test:integration:rs && npm run test:integration:ts",
+    "test:integration:rs": "npm run build && npm run postbuild && cd integration-tests/rs && cargo run --example integration-tests",
+    "test:integration:ts": "npm run build && npm run postbuild && ava --verbose"
   },
   "repository": {
     "type": "git",
