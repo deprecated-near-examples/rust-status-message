@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Compiles NEAR Protocol example of setting and retrieving a status message per NEAR account",
   "scripts": {
-    "build": "cargo build --target wasm32-unknown-unknown --release",
+    "build": "rustup target add wasm32-unknown-unknown && cargo build --target wasm32-unknown-unknown --release",
     "build:web": "parcel build ./frontend/index.html --public-url ./ --no-minify",
+    "postbuild": "cp ./target/wasm32-unknown-unknown/release/status_message.wasm ./res/",
     "deploy:dev": "npm run build && near dev-deploy res/status_message.wasm",
     "dev": "npm run deploy:dev && npm start",
     "start": "npm run build && npm run build:web && env-cmd -f ./neardev/dev-account.env parcel ./frontend/index.html",
-    "postbuild": "cp target/wasm32-unknown-unknown/release/status_message.wasm ./res/"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "cargo test -- --nocapture",
+    "test:integration": "npm run test:integration:rs && npm run test:integration:ts",
+    "test:integration:rs": "npm run build && npm run postbuild && cd integration-tests/rs && cargo run --example integration-tests",
+    "test:integration:ts": "npm run build && npm run postbuild && ava --verbose"
   },
   "repository": {
     "type": "git",
@@ -44,7 +49,11 @@
     "gh-pages": "^3.1.0",
     "parcel-bundler": "^1.12.5",
     "postcss": "^8.3.6",
-    "sass": "^1.37.0"
+    "sass": "^1.37.0",
+    "near-workspaces": "^2.0.0",
+    "ava": "^4.2.0",
+    "typescript": "^4.6.4",
+    "ts-node": "^10.7.0"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"
