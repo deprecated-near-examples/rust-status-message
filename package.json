@@ -45,15 +45,16 @@
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "ava": "^4.2.0",
     "cssnano": "^5.0.7",
     "gh-pages": "^3.1.0",
+    "near-workspaces": "^2.0.0",
+    "parcel": "^2.6.0",
     "parcel-bundler": "^1.12.5",
     "postcss": "^8.3.6",
     "sass": "^1.37.0",
-    "near-workspaces": "^2.0.0",
-    "ava": "^4.2.0",
-    "typescript": "^4.6.4",
-    "ts-node": "^10.7.0"
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"
