@@ -28,7 +28,6 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
     await contract.set_status(
       {
         message: message.value,
-        account_id: currentUser.accountId
       },
       BOATLOAD_OF_GAS
     );
@@ -46,7 +45,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
 
   const signIn = () => {
     wallet.requestSignIn(
-      {contractId: nearConfig.contractName, methodNames: ['set_status']},
+      { contractId: nearConfig.contractName, methodNames: ['set_status'] },
       "NEAR Status Message"
     );
   };
@@ -63,11 +62,11 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
 
         {currentUser ?
           <p>Currently signed in as: <code>{currentUser.accountId}</code></p>
-        :
+          :
           <p>Update or add a status message! Please login to continue.</p>
         }
 
-        { currentUser
+        {currentUser
           ? <button onClick={signOut}>Log out</button>
           : <button onClick={signIn}>Log in</button>
         }
@@ -89,7 +88,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
             </code>
           </p>
         </>
-      :
+        :
         <p>No status message yet!</p>
       }
     </main>

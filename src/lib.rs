@@ -24,7 +24,7 @@ impl StatusMessage {
     }
 
     pub fn get_status(&self, account_id: &AccountId) -> Option<String> {
-        return self.records.get(&account_id);
+        self.records.get(account_id)
     }
 }
 
