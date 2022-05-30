@@ -35,7 +35,7 @@
     "big.js": "^5.2.2",
     "borsh": "^0.4.0",
     "env-cmd": "^10.1.0",
-    "near-api-js": "^0.43.1",
+    "near-api-js": "^0.44.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
