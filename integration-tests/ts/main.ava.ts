@@ -12,8 +12,7 @@ test.beforeEach(async (t) => {
 
   // deploy contract
   const root = worker.rootAccount;
-  const contract = await root.createAndDeploy(
-    root.getSubAccount("rust-counter").accountId,
+  const contract = await root.devDeploy(
     "./res/status_message.wasm",
     { initialBalance: NEAR.parse("30 N").toJSON() }
   );
@@ -42,14 +41,14 @@ test.afterEach(async (t) => {
 });
 
 test("set get message", async (t) => {
-  const { root, contract, alice, bob, charlie } = t.context.accounts;
+  const { contract, alice } = t.context.accounts;
   await alice.call(contract, "set_status", { message: "hello" });
   const aliceStatus = await contract.view("get_status", { account_id: alice });
   t.is(aliceStatus, "hello");
 });
 
 test("get nonexistent message", async (t) => {
-  const { root, contract, alice, bob, charlie } = t.context.accounts;
+  const { root, contract } = t.context.accounts;
   const message: null = await contract.view("get_status", {
     account_id: root,
   });
