@@ -29,7 +29,7 @@ fi
 
 echo ==== Get status ====
 TEXT=$(near view $CONTRACT_NAME get_status '{"account_id": "'$CONTRACT_NAME'"}')
-if [[ ! "$TEXT" =~ .*"Example NEAR non-fungible token".* ]]; then
+if [[ ! "$TEXT" =~ .*"aloha!".* ]]; then
     echo -e "\033[0;31m FAIL \033[0m"
     exit 1
 else
